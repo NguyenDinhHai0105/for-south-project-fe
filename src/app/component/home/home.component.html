@@ -1,0 +1,89 @@
+<!-- <button class="btn btn-default" (click)="login()">
+  Login
+</button>
+<button class="btn btn-default" (click)="logout()">
+  Logout
+</button> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-navbar-theme">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0)">
+      <img src="assets/home.png" style="width: 150px; margin-left: 17px;" alt=""></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </ul>
+      <form class="d-flex" action="javascript:void(0)">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+      <div *ngIf="!getAccessToken">
+        <button class="btn btn-default" (click)="login()">
+          Login
+        </button>
+      </div>
+
+      <div *ngIf="getAccessToken">
+        <button class="btn btn-default" (click)="logout()">
+          Logout
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="wrapper">
+  <div class="container">
+    <div class="" style="max-width: 1500px; margin: 10% 10% 7% 5%;">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="assets/Designer__1_-removebg.png" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body" style="margin: 5% 10% 10% 5%;">
+            <h5 class="card-title">Xin chào !! 😊😊</h5>
+            <p class="card-text">Hải đây, blog này để tổng hợp và tìm hiểu kĩ các kiến thức mà mình học được, như Spring
+              Framework, Java core, Angular, Microservice, Oauth2, Keycloak...</p>
+            <p class="card-text"> Đồng thời cũng là một trang web dc build giúp nâng cao trình độ fullstack để kiếm
+              lương cao. <b>Cố lên !! ✌️✌️ </b>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let topic of topics; let i=index">
+        <div class="card text-dark card-has-bg click-col"
+          style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
+          <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street"
+            alt="Creative Manner Design Lorem Ipsum Sit Amet Consectetur dipisi?">
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-body">
+              <small class="card-meta mb-2">{{topic.name}}</small>
+              <h4 class="card-title mt-0 "><a class="text-dark" herf="https://creativemanner.com">{{topic.description}}
+                </a></h4>
+              <small><i class="far fa-clock"></i>Last update: {{topic.lastModifiedDate}}</small>
+            </div>
+            <div class="card-footer">
+              <div class="media">
+                <img class="mr-3 rounded-circle"
+                  src="https://assets.codepen.io/460692/internal/avatars/users/default.png?format=auto&version=1688931977&width=80&height=80"
+                  alt="Generic placeholder image" style="max-width:50px">
+                <div class="media-body">
+                  <h6 class="my-0 text-dark d-block">Oz Coruhlu</h6>
+                  <small>Director of UI/UX</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
