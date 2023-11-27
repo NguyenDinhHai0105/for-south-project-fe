@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Topic } from 'src/app/model/topic';
-import { LoginService } from 'src/app/service/login.service';
 import { TopicService } from 'src/app/service/topic.service';
 
 @Component({
@@ -9,29 +10,15 @@ import { TopicService } from 'src/app/service/topic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
 
   topics!: Topic[];
 
-  constructor(private oauthService: OAuthService, private topicService: TopicService, private loginService: LoginService) {}
+  constructor(private topicService: TopicService, private router: Router, private oauthService: OAuthService, private jwtHelper: JwtHelperService) { }
 
 
   ngOnInit(): void {
     this.getAllTopicToDisplayInHomePage();
-  }
-
-  public login(): void {
-    this.loginService.login();
-  }
-
-  public logout(): void {
-    this.loginService.logout();
-  }
-
-  get getAccessToken() {
-    let claims: any = this.oauthService.getIdentityClaims();
-    // console.log(this.oauthService.getAccessToken())
-    return claims ? claims : null;
   }
 
   public getAllTopicToDisplayInHomePage() {
@@ -42,4 +29,23 @@ export class HomeComponent implements OnInit{
       }
     )
   }
+
+  get admin () {
+    const token = this.oauthService.getAccessToken();
+    const claims = this.jwtHelper.decodeToken(token);
+    const roles = claims['realm_access'];
+    const elements: string[] = roles['roles'];
+    const adminIndex1: number = elements.indexOf('admin');
+    if (adminIndex1 !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
+
+  // goToTechnolygy(id: string) {
+  //   this.router.navigate(['technology']);
+  // }
 }
