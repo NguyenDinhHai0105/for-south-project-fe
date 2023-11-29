@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AuthConfig, NullValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthConfig, OAuthService } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
+
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,7 @@ export class LoginService {
     showDebugInformation: true
   }
 
-  constructor(private oauthService: OAuthService) {
+  constructor(private oauthService: OAuthService, private jwtHelper: JwtHelperService) {
     this.configure();
   }
 
@@ -39,4 +41,21 @@ export class LoginService {
     this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
+
+  get checkRoles() {
+    const token = this.oauthService.getAccessToken();
+    if(token) {
+      const claims = this.jwtHelper.decodeToken(token);
+      const roles = claims['realm_access'];
+      const elements: string[] = roles['roles'];
+      const adminIndex1: number = elements.indexOf('admin');
+      if (adminIndex1 !== -1) {
+        return true;
+      } else {
+        return false;
+      }
+    } 
+    return false;    
+  }
+
 }

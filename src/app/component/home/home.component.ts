@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Topic } from 'src/app/model/topic';
+import { LoginService } from 'src/app/service/login.service';
 import { TopicService } from 'src/app/service/topic.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   topics!: Topic[];
 
-  constructor(private topicService: TopicService, private router: Router, private oauthService: OAuthService, private jwtHelper: JwtHelperService) { }
+  constructor(private topicService: TopicService, private router: Router, private loginService: LoginService) { }
 
 
   ngOnInit(): void {
@@ -30,18 +31,10 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  get admin () {
-    const token = this.oauthService.getAccessToken();
-    const claims = this.jwtHelper.decodeToken(token);
-    const roles = claims['realm_access'];
-    const elements: string[] = roles['roles'];
-    const adminIndex1: number = elements.indexOf('admin');
-    if (adminIndex1 !== -1) {
-      return true;
-    } else {
-      return false;
-    }
+  get isAdmin() {
+    return this.loginService.checkRoles;
   }
+
 
 
 

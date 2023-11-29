@@ -111,3 +111,15 @@ body{
       position: relative;
       left: 0;
     }
+
+/* Import Roboto font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+/* Example styling for links */
+#description {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; /* Độ đậm của chữ (400 là font bình thường, 700 là font đậm) */
+  text-decoration: none; /* Remove underlines from links */
+  color: #555555;        /* Set link color to blue, adjust as needed */
+}

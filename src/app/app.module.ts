@@ -10,6 +10,7 @@ import { HeaderComponent } from './component/header/header.component';
 import { TechnologyComponent } from './component/technology/technology.component';
 import { CommonModalComponent } from './component/common-modal/common-modal.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { JwtModule } from '@auth0/angular-jwt';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     JwtModule.forRoot({
       config: {        
         allowedDomains: ["example.com"],
