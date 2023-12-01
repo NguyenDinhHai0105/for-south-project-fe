@@ -22,11 +22,11 @@
     <div class="row">
       <div class="col-sm-12 col-md-6 col-lg-4 mb-4" *ngFor="let topic of topics; let i=index">
         <div class="card card-has-bg click-col"          >
-          <div class="card d-flex flex-column" style="background-color: rgb(255, 255, 255);">
+          <a class="card d-flex flex-column" id="description"
+          [routerLink]="['/topic', topic.id, 'technologies']" style="background-color: rgb(255, 255, 255);">        
             <div class="card-body" style="padding: 8% 6% 6% 8% ;">
-              <h3 class="mb-2 text-dark"><strong>{{topic.name}}</strong></h3>
-              <h6 class="mt-0" style="padding-top: 5%;"><a id="description"
-                  [routerLink]="['/technology', topic.id ]">{{topic.description}}</a></h6>              
+              <h3 class="mb-2 text-dark" style="height: 100px; border-radius: 10px; text-align: center;"><strong>{{topic.name}}</strong></h3>
+              <h6 class="mt-0" style="padding-top: 5%;">{{topic.description}}</h6>              
             </div>
             <div class="card-footer">
               <div class="media" style="padding-left: 4%; padding-bottom: 6%;">
@@ -36,7 +36,7 @@
                 <small><i class="far fa-clock"></i>Last update: {{topic.lastModifiedDate}}</small>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <div *ngIf="isAdmin" class="col-sm-12 col-md-6 col-lg-4 mb-4">

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Topic } from 'src/app/model/topic';
 import { LoginService } from 'src/app/service/login.service';
@@ -15,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   topics!: Topic[];
 
-  constructor(private topicService: TopicService, private router: Router, private loginService: LoginService) { }
+  constructor(private topicService: TopicService, private router: Router, private loginService: LoginService, private oauth: OAuthService) { }
 
 
   ngOnInit(): void {
@@ -27,6 +26,7 @@ export class HomeComponent implements OnInit {
       data => {
         this.topics = data;
         console.log(this.topics);
+        console.log(this.router.url)
       }
     )
   }

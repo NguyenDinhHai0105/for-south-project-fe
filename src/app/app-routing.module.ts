@@ -6,7 +6,7 @@ import { CommonModalComponent } from './component/common-modal/common-modal.comp
 
 const routes: Routes = [
   { path: "home", component: HomeComponent },
-  { path: "technology/:id", component: TechnologyComponent},
+  { path: "topic/:id/technologies", component: TechnologyComponent},
   { path: "add-topic", component: CommonModalComponent},
   { path: "**", redirectTo: 'home', pathMatch: 'full'}
 ];
