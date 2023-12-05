@@ -1,0 +1,14 @@
+<!-- <div *ngFor="let catalogue of catalogues">
+    <h1>{{catalogue.id}}</h1>
+    <h1>{{catalogue.title}}</h1>
+</div> -->
+
+<div id="myElement">
+
+</div>
+<div *ngFor="let catalogue of catalogues2" >
+    <h1>{{catalogue.id}}</h1>
+    <h1>{{catalogue.title}}</h1>
+    <div [innerHTML]="catalogue.htmlContent"></div>
+    
+</div>

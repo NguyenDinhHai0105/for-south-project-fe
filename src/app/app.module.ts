@@ -11,6 +11,7 @@ import { TechnologyComponent } from './component/technology/technology.component
 import { CommonModalComponent } from './component/common-modal/common-modal.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
+import { CatalogueComponent } from './component/catalogue/catalogue.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     HeaderComponent,
     TechnologyComponent,
-    CommonModalComponent
+    CommonModalComponent,
+    CatalogueComponent
   ],
   imports: [
     BrowserModule,
