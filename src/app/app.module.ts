@@ -12,6 +12,7 @@ import { CommonModalComponent } from './component/common-modal/common-modal.comp
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 import { CatalogueComponent } from './component/catalogue/catalogue.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CatalogueComponent } from './component/catalogue/catalogue.component';
   ],
   imports: [
     BrowserModule,
+    CKEditorModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

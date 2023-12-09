@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { Topic } from 'src/app/model/topic';
 import { LoginService } from 'src/app/service/login.service';
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private topicService: TopicService, private router: Router, private loginService: LoginService, private oauth: OAuthService) { }
 
+  title = 'angular';
 
   ngOnInit(): void {
     this.getAllTopicToDisplayInHomePage();

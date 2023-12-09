@@ -18,4 +18,8 @@ export class CatalogueService {
   public getCataloguesOfATechnology(technologyId: string): Observable<any> {
     return this.httpClient.get<any>(`${ResourceApi.GET_CATALOGUES_BY_TECHNOLOGY_ID_URL}/${technologyId}`);
   }
+
+  public getCatalogueById(catalogueId: string): Observable<any> {
+    return this.httpClient.get<any>(`${ResourceApi.GET_CATALOGUE_BY_ID_URL}/${catalogueId}`)
+  }
 }
