@@ -12,18 +12,19 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class CatalogueComponent implements OnInit {
 
-  technologyId!: string;
+  technologyId: string = this.route.snapshot.params['technologyId'];
   firstCatalogue!: Catalogue;
   htmlContent!: string;
   catalogueGotById!: Catalogue;
-  cataloguesContainIdAndTitle!: Catalogue[];
+  cataloguesContainIdAndTitle: Catalogue[] = new Array;
   Editor = ClassicEditor;
+  formVisible: boolean = false;
+  catalogue: Catalogue = new Catalogue;
 
 
   constructor(private catalogueService: CatalogueService, private loginService: LoginService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.technologyId = this.route.snapshot.params['technologyId'];
     this.getIdAndTitleOfCatalogues();
   }
 
@@ -31,7 +32,11 @@ export class CatalogueComponent implements OnInit {
     this.catalogueService.getTitleAndIdOfCataloguesOfATechnology(this.technologyId).subscribe(
       data => {
         this.cataloguesContainIdAndTitle = data;
-        this.getCatalogueById(this.cataloguesContainIdAndTitle[0].id);
+        try {
+          this.getCatalogueById(this.cataloguesContainIdAndTitle[0].id);
+        } catch (error) {
+          console.log(error);
+        }        
       }
     )
   }
@@ -47,6 +52,51 @@ export class CatalogueComponent implements OnInit {
         this.htmlContent = this.catalogueGotById.htmlContent;
       }
     )
+  }
+
+  createForm() {
+     // Khi nhấn vào nút, đặt giá trị formVisible thành true để hiển thị form
+     this.formVisible = true;
+  }
+
+  public cancelFrom() {
+    this.formVisible = false;
+  }
+
+  public addNewCatalogue() {
+    this.catalogue.title = this.getTitle();
+    this.catalogue.technologyId = this.technologyId;
+    this.catalogueService.saveNewCatalougue(this.catalogue).subscribe(
+      data => {
+        this.reloadComponent();
+      }
+    )
+    this.formVisible = false;
+  }
+
+  public getTitle() {
+    var container = document.getElementById("ckediter") || new HTMLElement;
+    var elements = container.querySelectorAll('h2, p');
+    var contentArray = Array.from(elements).map(element => element.textContent);
+    var title = contentArray[0] ? contentArray[0] : '';
+    return title;
+  }
+
+  public updateForm() {
+    this.catalogue.id = this.catalogueGotById.id;
+    this.catalogue.technologyId = this.technologyId;
+    this.catalogue.title = this.getTitle();
+    this.catalogue.htmlContent = this.htmlContent;
+    this.catalogueService.updateCatalogue(this.catalogue).subscribe(
+      data => {
+        console.log(this.catalogue);
+        this.reloadComponent();
+      }
+    );
+  }
+
+  public reloadComponent() {
+    this.ngOnInit();
   }
 
 }

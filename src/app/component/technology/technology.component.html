@@ -3,22 +3,65 @@
         <div class="col-lg-10 mx-auto">
             <div class="career-search mb-60">
                 <div class="filter-result">
-                    <a [routerLink]="['/catalogues', technology.id]" class="job-box d-md-flex align-items-center justify-content-between mb-30" *ngFor="let technology of technologies">
+                    <div
+                        class="job-box d-md-flex align-items-center justify-content-between mb-30"
+                        *ngFor="let technology of technologies">
                         <div class="job-left my-4 d-md-flex align-items-center flex-wrap">
                             <div class="img-holder mr-md-4 mb-md-0 mb-4 mx-auto mx-md-0 d-md-none d-lg-flex">
                                 {{technology.icon}}
                             </div>
                             <div class="job-content">
-                                <a class="text-center text-md-left" style="margin-left: 15px; margin-bottom: 0px; ">{{technology.description}}</a>
+                                <a class="text-center text-md-left" [routerLink]="['/catalogues', technology.id]"
+                                    style="margin-left: 15px; margin-bottom: 0px; ">{{technology.description}}</a>
                             </div>
                         </div>
                         <div *ngIf="isAdmin">
                             <div class="job-right flex-shrink-0">
-                                <button class="btn w-50 d-sm-inline-block"><span class="material-icons" style="font-size: 30px; color: rgb(2, 63, 194)">edit</span></button>
-                                <button (click)="deleteTechnologyById(technology.id)" class="btn w-50 d-sm-inline-block"><span class="material-icons" style="font-size: 30px; color: rgb(238, 68, 68);">delete</span></button>
+                                <button class="btn w-50 d-sm-inline-block"><span class="material-icons"
+                                        style="font-size: 30px; color: rgb(2, 63, 194)">edit</span></button>
+                                <button (click)="deleteTechnologyById(technology.id)"
+                                    class="btn w-50 d-sm-inline-block"><span class="material-icons"
+                                        style="font-size: 30px; color: rgb(238, 68, 68);">delete</span></button>
                             </div>
                         </div>
-                    </a>
+                    </div>
+                </div>
+                <!-- Button trigger modal -->
+                <div *ngIf="isAdmin">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="margin-bottom: 10%;">
+                        Add new technology
+                    </button>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="" method="post" (ngSubmit)="onSubmit()">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">New technology</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-3">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
+                                    <ul class="dropdown-menu">
+                                      <li>pick 1</li>
+                                      <li>pick 2</li>
+                                      <li>pick 3</li>
+                                    </ul>
+                                    <input [(ngModel)]="technology.description" type="text" class="form-control" name="name" aria-label="Text input with dropdown button" placeholder="technology name" >
+                                  </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" type="submit" data-bs-dismiss="modal">Add</button>
+                            </div>
+                        </div>
+                        </form>
+                        
+                    </div>
                 </div>
             </div>
 

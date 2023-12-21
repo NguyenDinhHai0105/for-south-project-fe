@@ -6,7 +6,7 @@
         </a>
         <div class="list-group list-group-flush scrollarea">
             <div *ngFor="let catalogue of cataloguesContainIdAndTitle" class="left">
-                <button (click)="getCatalogueById(catalogue.id)" class="list-group-item list-group-item-action"
+                <button (click)="getCatalogueById(catalogue.id)"  class="list-group-item list-group-item-action"
                     style="padding: 12px; border: none;">
                     <div class="w-100 d-flex align-items-center justify-content-between"
                         style="justify-content: start!important;;">
@@ -15,18 +15,43 @@
                     </div>
                 </button>
             </div>
-            <button type="button" class="btn btn-success" style="width: 40%; margin-left: auto; margin-right: auto; margin-top: 10px; display: block;">Add</button>
+            <div *ngIf="isAdmin">
+                <button (click)="createForm()" type="button" class="btn btn-success"
+                    style="width: 60%; margin-left: auto; margin-right: auto; margin-top: 10px; display: block;">New
+                    catalogue</button>
+            </div>
         </div>
     </div>
-    <div class="right">
-        <div *ngIf="isAdmin" class="content">
-            <ckeditor [editor]="Editor" [(ngModel)]="htmlContent"></ckeditor>
-        </div>
+
+    <div *ngIf="formVisible" class="right">
+        <form>
+            <!-- Nội dung của biểu mẫu -->
+            <div class="content">
+                <h3>Add new catalogue</h3>
+                <ckeditor name="editer" id="ckediter" [editor]="Editor" [(ngModel)]="catalogue.htmlContent"></ckeditor>
+                <div style="margin-top: 10px;">
+                    <button style="margin-right: 10px;" type="button" class="btn btn-primary" (click)="addNewCatalogue()">Submit</button>
+                    <button type="button" class="btn btn-danger" (click)="cancelFrom()"> Cancel </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="right" *ngIf="!formVisible">
+        <form>
+            <div *ngIf="isAdmin && cataloguesContainIdAndTitle.length != 0" class="content">
+                <ckeditor [editor]="Editor" [(ngModel)]="htmlContent" name="activeForm" id="ckediter"></ckeditor>
+            </div>
+            <button type="button" class="btn btn-primary" (click)="updateForm()" style="margin-left: 20px; ">Update</button>
+        </form>
         <div *ngIf="!isAdmin" class="content">
             <div [innerHTML]="htmlContent"></div>
-        </div>
+        </div>        
+
     </div>
-    <div style="margin: 55px;" >
-        <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/337265068_180039621468056_2460111740808674904_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=3635dc&_nc_ohc=NMcbUzGLH_wAX9Dsowo&_nc_ht=scontent.fhan2-4.fna&oh=00_AfD5W1tN85sFkSsoDryoeqoDTCKLM0XeknTU75ai99rTtA&oe=657A8B1A" alt="" srcset="" style="width: 500px; border-radius: 20px; box-shadow: 10px 10px 10px rgba(5, 84, 187, 0.5)" >
+    <div style="margin: 55px;">
+        <img src="https://i1.wp.com/lucloi.vn/wp-content/uploads/2023/06/zerotwo-dance.gif?resize=484%2C640&ssl=1"
+            alt="" srcset=""
+            style="width: 500px; border-radius: 20px; box-shadow: 10px 10px 10px rgba(5, 84, 187, 0.5)">
     </div>
 </div>

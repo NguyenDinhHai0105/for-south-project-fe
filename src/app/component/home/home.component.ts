@@ -27,8 +27,6 @@ export class HomeComponent implements OnInit {
     this.topicService.getAllTopic().subscribe(
       data => {
         this.topics = data;
-        console.log(this.topics);
-        console.log(this.router.url)
       }
     )
   }

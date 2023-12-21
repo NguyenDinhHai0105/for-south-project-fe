@@ -180,8 +180,8 @@ ul {
 }
 
 a {
-    text-decoration: none; /* Remove underline */
-    color: #000000; /* Set link color */
+    text-decoration: none; 
+    color: #000000;
     font-size: 35px;
     font-family: monospace;
 }

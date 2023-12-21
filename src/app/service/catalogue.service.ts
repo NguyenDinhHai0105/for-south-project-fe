@@ -22,4 +22,13 @@ export class CatalogueService {
   public getCatalogueById(catalogueId: string): Observable<any> {
     return this.httpClient.get<any>(`${ResourceApi.GET_CATALOGUE_BY_ID_URL}/${catalogueId}`)
   }
+
+  public saveNewCatalougue(catalogue: Catalogue): Observable<Catalogue> {
+    return this.httpClient.post<Catalogue>(`${ResourceApi.CATALOGUE_URL}`, catalogue);
+  }
+
+  public updateCatalogue(catalogue: Catalogue): Observable<Catalogue> {
+    return this.httpClient.put<Catalogue>(`${ResourceApi.CATALOGUE_URL}`, catalogue);
+  }
+
 }

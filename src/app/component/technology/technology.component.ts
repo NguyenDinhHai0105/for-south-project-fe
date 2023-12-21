@@ -12,12 +12,12 @@ import { TechnologyService } from 'src/app/service/technology.service';
 export class TechnologyComponent implements OnInit{
   
   topicId!: string;
+  technology: Technology = new Technology();
   technologies!: Technology[];
 
   constructor(private loginService: LoginService, private route: ActivatedRoute, private technologyService: TechnologyService, private router: Router) {};
 
   ngOnInit(): void {
-    console.log(this.route.snapshot);
     this.topicId = this.route.snapshot.params['id'];
     this.getTechnology();
   }
@@ -26,7 +26,6 @@ export class TechnologyComponent implements OnInit{
     this.technologyService.getAllTechnologiesOfTopic(this.topicId).subscribe(
       data => {
         this.technologies = data;
-        console.log(data);
       })
   }
 
@@ -40,6 +39,23 @@ export class TechnologyComponent implements OnInit{
         this.getTechnology();
       }
     );
+  }
+
+  public addNewTechnology() {
+    this.technology.topicId = this.topicId;
+    this.technologyService.addTechnology(this.technology).subscribe(
+      data => {
+        this.reloadComponent();
+      }
+    );
+  }
+
+  public reloadComponent() {
+    this.ngOnInit();
+  }
+
+  public onSubmit() {
+    this.addNewTechnology();
   }
 
 }
