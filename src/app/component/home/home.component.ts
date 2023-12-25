@@ -13,23 +13,39 @@ import { TopicService } from 'src/app/service/topic.service';
 })
 export class HomeComponent implements OnInit {
 
-  topics!: Topic[];
+  topics: Topic[] = [
+    {
+      id: '1',
+      name: 'Topic 1',
+      description: 'Description for Topic 1',
+      createdDate: new Date(),
+      lastModifiedDate: new Date(),
+    },
+    {
+      id: '2',
+      name: 'Topic 2',
+      description: 'Description for Topic 2',
+      createdDate: new Date(),
+      lastModifiedDate: new Date(),
+    },
+    // Add more Topic objects as needed
+  ];;
 
   constructor(private topicService: TopicService, private router: Router, private loginService: LoginService, private oauth: OAuthService) { }
 
   title = 'angular';
 
   ngOnInit(): void {
-    this.getAllTopicToDisplayInHomePage();
+    // this.getAllTopicToDisplayInHomePage();
   }
 
-  public getAllTopicToDisplayInHomePage() {
-    this.topicService.getAllTopic().subscribe(
-      data => {
-        this.topics = data;
-      }
-    )
-  }
+  // public getAllTopicToDisplayInHomePage() {
+  //   this.topicService.getAllTopic().subscribe(
+  //     data => {
+  //       this.topics = data;
+  //     }
+  //   )
+  // }
 
   get isAdmin() {
     return this.loginService.checkRoles;
